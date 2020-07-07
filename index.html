@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dice Game</title>
+        <!---
+            Dice Game
+            Roll the dice to beat opponent
+            Built with CSS Flexbox, HTML5, Javascript, 
+        -->
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <script src="dice.js" ></script>
+    </head>
+    <body onload="setupScreen()">
+        <header>
+           <h1>Dice Game</h1>
+        </header>
+        <main>
+            <div class='main-column'>
+                <div class="directions">
+                    <div class="directions-box">
+                        <h2>Directions: </h2>
+                        <ol>
+                            <li>Each player chooses a “knock out number” – either 6, 7, 8, or 9. More than one player can choose the same number.</li>
+                            <li>Players take turns throwing both dice, once each turn. Add the number of both dice for the score.</li>
+                            <li>If a player throws a their kock out number their score is knocked down to zero.</li>
+                            <li>The first player to 24 wins.</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="game-info">
+                        <h2> </h2>
+                </div>
+                <div class="game-score">
+                    <h2>Scoreboard: </h2>
+                    <div class="scoreboard-players">
+                        <h3 class='player1'> </h3>
+                        <h3 class='player2'> </h3>
+                        <h3 class='player3'></h3>
+                        <h3 class='player4'></h3>
+                    </div>
+            </div>
+                <div class="dice-row">
+                    <div class="dice-1">
+                        <div class="dice first-face">
+                            <span class="dot"> </span>
+                        </div>
+                        <div class="dice second-face">
+                            <span class="dot"> </span>
+                            <span class="dot"> </span>
+                        </div>
+                        <div class="dice third-face">
+                            <span class="dot"> </span>
+                            <span class="dot"> </span>
+                            <span class="dot"> </span>
+                        </div>
+                        <div class="dice fourth-face">
+                        <div class="column">
+                                <span class="dot"> </span>
+                                <span class="dot"> </span>
+                            </div>
+                            <div class="column">
+                                <span class="dot"> </span>
+                                <span class="dot"> </span>
+                            </div>
+                        </div>
+                        <div class="dice fifth-face">
+                            <div class="column">
+                                <span class="dot"> </span>
+                                <span class="dot"> </span>
+                            </div>
+                            <div class="column">
+                                <span class="dot"></span>
+                            </div>
+                            <div class="column">
+                                <span class="dot"> </span>
+                                <span class="dot"> </span>
+                            </div>
+                        </div> 
+                        <div class="dice sixth-face">
+                            <div class="column">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <div class="column">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dice-2">
+                        <div class="dice2 first-face">
+                            <span class="dot"> </span>
+                        </div>
+                        <div class="dice2 second-face">
+                            <span class="dot"> </span>
+                            <span class="dot"> </span>
+                        </div>
+                        <div class="dice2 third-face">
+                            <span class="dot"> </span>
+                            <span class="dot"> </span>
+                            <span class="dot"> </span>
+                        </div>
+                        <div class="dice2 fourth-face">
+                        <div class="column">
+                                <span class="dot"> </span>
+                                <span class="dot"> </span>
+                            </div>
+                            <div class="column">
+                                <span class="dot"> </span>
+                                <span class="dot"> </span>
+                            </div>
+                        </div>
+                        <div class="dice2 fifth-face">
+                            <div class="column">
+                                <span class="dot"> </span>
+                                <span class="dot"> </span>
+                            </div>
+                            <div class="column">
+                                <span class="dot"></span>
+                            </div>
+                            <div class="column">
+                                <span class="dot"> </span>
+                                <span class="dot"> </span>
+                            </div>
+                        </div> 
+                        <div class="dice2 sixth-face">
+                            <div class="column">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <div class="column">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>   
+                    </div> 
+                </div>
+                <div class="control-panel">
+                    <button class="roll" onclick="die1.rollDice(); die2.rollDice(); executeTurn();">
+                        Roll Dice!
+                    </button>
+                    <button class="startGame" onclick="startGame()">
+                       Start Game!
+                    </button>
+                    <button class="endGame" onclick="endGame()">
+                        End Game!
+                     </button>
+                </div>
+            </div>
+        </main>
+        <footer><p>Made by Todd Whiteow Jr.</p></footer>
+    </body>
+</html>

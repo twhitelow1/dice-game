@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+body{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    max-width: 80%;
+    margin: 50px 50%;    
+    background-color: rgb(231, 231, 231);
+}
+header{
+    background-color: rgb(255, 99, 71);  
+    box-shadow: 0px 3px 3px rgba(163, 24, 0, 0.651);  ;
+    border-bottom: 1px rgb(255, 80, 49);
+    width: 100%;
+    padding: 10px 0;
+}
+footer{
+    padding: 10px 0;
+    color: rgb(32, 32, 32);
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    bottom: 0px;
+}
+footer p{
+    text-align: center;
+}
+h1{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+.main-column{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 200px 0 200px;
+}
+.directions-box{
+    width: 500px;
+    margin-bottom: 50px;
+    background-color: rgb(255, 99, 71);
+    border: 1px solid rgb(255, 99, 71);
+    box-shadow: 3px 3px 5px darkgrey;
+    padding: 20px 50px 30px 50px;
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.directions-box ol{
+    line-height: 25px;
+}
+
+.directions-box h2{
+    font-size: 25px;
+    text-align: center;
+    padding: 0 0 5px 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.game-info{
+    margin-bottom: 20px;
+    font-size: 25px;
+    text-align: center;
+    display: none;
+    flex-direction: column;
+}
+.game-score{
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 25px;
+    flex-direction: column;
+    display: none;
+}
+.game-score h3{
+    font-size: 20px;
+}
+
+.dice-row{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.dice {  
+    display: flex;
+    padding: 4px;  
+    background-color: rgb(255, 99, 71);  
+    width: 104px;  
+    height: 104px;  
+    border-radius: 10%;
+    margin: 5px 5px;
+}
+.dice2 {  
+    display: flex;
+    padding: 4px;  
+    background-color: rgb(22, 255, 1);  
+    width: 104px;  
+    height: 104px;  
+    border-radius: 10%;
+    margin: 5px 5px;
+}
+.dot {
+    display: block;
+       width: 24px;
+       height: 24px;
+       border-radius: 50%;
+       background-color:white;
+    }
+
+.first-face {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.second-face {
+    display: none;
+    justify-content: space-between;
+}
+.second-face .dot:nth-of-type(2) {
+    align-self: flex-end;
+}
+.third-face{
+    display: none;
+    justify-content: space-between;
+}
+.third-face .dot:nth-of-type(1) {
+    align-self :flex-end;
+}
+    .third-face .dot:nth-of-type(2) {
+    align-self :center;
+}
+
+/* Here we style the face of the die on number 4
+    Set the fourth face as a flex box.
+    and space the child contents  to
+    have space between them which pushes
+    them to the left and right
+*/
+.fourth-face{
+    display: none;
+    justify-content: space-between ;
+}
+/* 
+    The child elements in the .fourth-face
+    flexbox are two columns clases with 
+    two .dot span classes that create the 
+    total of four dots on the face.
+    create another flexbox for each column
+    child. Flex-direction column is set to the 
+    columns to makethe two dots align with 
+    the verticle axis. Justify content : 
+    space-between pushes the two dots to 
+    to top and bottom of the die. Now all 
+    four dots are in the corners
+*/
+.fourth-face .column{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* End fourth face style */
+
+/* Style 5 Face*/
+
+    /* Here we style the number 5 face
+    Set the fifth face as a flex box.
+    and space the child contents  to
+    have space between them which pushes
+    them to the left and right
+*/
+.fifth-face{
+    display: none;
+    justify-content: space-between ;
+}
+/* 
+    The child elements in the .fifth-face
+    flexbox are three columns clases with 
+    two .dot span classes in the first and
+    last column and one .dot span class in
+    the middle column. 5 total dots 3 columns.
+    Create flexbox and  align dots in each column
+    with verticle axis using Flex-direction column.
+    Justify content : space-between pushes the 
+    two dots to to top and bottom of the die 
+    all four corners of object. The middle dot will 
+    be at the top of its column until the next style
+*/
+.fifth-face .column{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} 
+/* Use nth-of-type() css funtion to 
+    select the 2nd column and center
+    the dot in the column.
+*/
+
+.fifth-face .column:nth-of-type(2) {
+    justify-content: center;
+}
+
+/* End Fifth Face Style */
+
+/* Start sixth-face style */
+
+/*
+    Sets the sixth face as a flex box.
+    and spaces the child elements which are columns
+    as 'space-between' them which pushes
+    the columns to the left and right of the dice
+*/
+.sixth-face{
+    display: none;
+    justify-content: space-between ;
+}
+/* 
+    The child elements in the .sixth-face
+    flexbox are two columns clases with 
+    three .dot span classes that create the 
+    total of six dots on the face.
+
+    Here we create another flexbox for each column
+    Flex-direction column is set to the 
+    columns to make the dots align with 
+    the verticle axis. J
+    
+    Justify content : space-between pushes the six dots to 
+    allow even space between them.
+*/
+.sixth-face .column{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Style control Panel */
+
+.control-panel{
+    padding: 10px;
+}
+
+/* Style Buttons */
+
+button{
+    background-color: rgb(255, 99, 71);
+    border: 1px solid rgb(255, 99, 59);
+    color: white;
+    padding: 7px 20px;
+    margin: 0 5px;
+    width: 150px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.5);
+    left: 0px;
+}
+
+
+.control-panel{
+    display: flex;
+    justify-content: center;
+}
+
+button:hover{
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 600px){
+    .directions-box{
+        width: 80%;
+    }
+}

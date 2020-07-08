@@ -159,19 +159,45 @@ function startGame(){
 
     // Ask for the number of players and parse answer as an int
     let numOfPlayers = parseInt(prompt('How Many Players?'));
+
     // Create variable to test the number of players
     let checkPlayerCount = numOfPlayers;
+
+
+    let patt = RegExp("[^0-9]", "g");
+    let res = patt.test(checkPlayerCount);
+    console.log(`result of reg exp: ${res}`);
+
+    while(res === true) {
+        checkPlayerCount = prompt(' Must be a number 1 - 4. How many players?');
+        patt = RegExp("[^0-9]", "g");
+        res = patt.test(checkPlayerCount);
+
+        if(res !== true){
+            numOfPlayers = checkPlayerCount;
+        }
+    }
+
     // While input for how many players is less than 1 
     while(checkPlayerCount < 1){
         // Alert that you need at least 1 player. Prompt for new input. Parse the answer to Int.
-        checkPlayerCount = parseInt(prompt('You need at least 1 player. How many Players?'));
+        checkPlayerCount = prompt('You need at least 1 player. How many Players?');
+        
         if(checkPlayerCount > 1){
             numOfPlayers = checkPlayerCount;
         }
     }
     // While the input for how many players is greater than 4. Parse the answer to Int.
     while(checkPlayerCount > 4){
-        checkPlayerCount = parseInt(prompt('You can only have up to 4 players. How many Players?'));
+        checkPlayerCount = prompt('You can only have up to 4 players. How many Players?');
+        const patt = RegExp("[^0-9]", "g");
+        const res = patt.test(checkPlayerCount);
+        if(res === true) {
+            checkPlayerCount = prompt(' Must be a number 1 - 4. How many players?');
+        } else {
+            checkPlayerCount = parseInt(checkPlayerCount);
+        }
+
         if(checkPlayerCount <= 4 ){
            numOfPlayers = checkPlayerCount;
         }
@@ -200,8 +226,22 @@ function startGame(){
         playerNames.push(playerName);
 
         // Get the knock out number from player and store in playerKO
-        let playerKO = parseInt(prompt(`What is the knock number for ${playerName}? (Choose 6 - 9)`));
+        let playerKO = prompt(`What is the knock number for ${playerName}? (Choose 6 - 9)`);
         let checkPlayerKO = playerKO;
+
+        let patt = RegExp("[^6-9]", "g");
+        let res = patt.test(checkPlayerKO);
+        console.log(`result of reg exp on knock out: ${res}`);
+
+        while(res === true) {
+            checkPlayerKO = prompt(`Must be a number 6 - 9 only. Whats the knock out number for ${playerName}`);
+            patt = RegExp("[^6-9]", "g");
+            res = patt.test(checkPlayerKO);
+
+            if(checkPlayerKO >= 6 && checkPlayerKO <= 9){
+                playerKO = checkPlayerKO;
+            }
+        }
 
         // Check the playerKO to make sure that it is 6 or greater and 9 or less.
         if(checkPlayerKO < 6 || checkPlayerKO > 9){
@@ -209,6 +249,8 @@ function startGame(){
             while(isWrong === true){
                 checkPlayerKO = parseInt(prompt(`Knock Number Is Out Of Range.
                 What is the knock number for ${playerName}? (Choose 6 - 9)`));
+
+
                 if(checkPlayerKO >= 6 && checkPlayerKO <= 9){
                     isWrong = false;
                     playerKO = checkPlayerKO;
@@ -246,6 +288,7 @@ function startGame(){
     newGame.numOfPlayers = numOfPlayers; 
     newGame.knockOutNumbers = knockOutNumbers;
     newGame.isOver = false;
+    
     console.log(newGame);
     setupScreen();
     //showScoreBoard();
@@ -262,16 +305,13 @@ executeTurn = () =>{
     player = playerObjectSelector(activePlayer);
 
     rollResult = die1.face + die2.face;
-    knockOutNumbers = newGame.knockOutNumbers;
-
-    for(i = 0; i < knockOutNumbers.length; i++){
-        if(knockOutNumbers[i] === rollResult){
+        if(player.knockOutNum === rollResult){
             player.score = 0;
+            alert(`${player.playerName} rolled their knockout number so their score was reset!`)
         }
         else{
             player.score += rollResult;
         }
-    }
     
 
     //console.log(`Current Player at roll: ${player.playerName}`);
@@ -280,29 +320,50 @@ executeTurn = () =>{
 
     setupScreen();
 
-    if(player.score >= 25){
+    if(player.score >= 24){
         alert(`${player.playerName} wins!`)
+        document.querySelector('.roll').style.display = 'none';
+        endGame();
     }
 
     if(activePlayer === playerCount){
         newGame.currentPlayerNum = 1;
     }else if(activePlayer < playerCount){
         newGame.currentPlayerNum ++;
-    }else if(acivePlayer > playerCount){
+    }else if(activePlayer > playerCount){
         alert('Error: active player higher than player count?!')
     }else {
+        console.log(`Active player swither failed this is the current acivePlayer value: ${activePlayer}
+        and this is the ${playerCount}`);
         alert('Error with active player count!');
     }
 
     console.log(`newGame.CurrentPlayerNum: ${newGame.currentPlayerNum}`);
+    console.log(`end of turn current player number: ${newGame.currentPlayerNum}`)
     setupScreen();
     
 }
+clearPlayers = () =>{
 
+    for(i = 1; i <= newGame.numOfPlayers; i++){
+        player = playerObjectSelector(i);
+        player.playerName = '';
+        player.score = 0;
+        player.knockOutNum = 0;
+        rollResult = 0;
+        //alert(`Cleared ${player.playerName} score(${player.score}) and knock out number(${player.knockOutNum})`)
+    }
+}
 endGame = () =>{
+    clearPlayers();
     newGame.isOver = true;
+    newGame.playerNames = []; 
+    newGame.numOfPlayers = 0; 
+    newGame.currentPlayerNum = 0;
+    newGame.knockOutNumbers = null;
     setupScreen();
     console.log(`Value of newGame.isOver is ${newGame.isOver}`);
+    console.log(``)
     if(newGame.isOver === true){
         console.log('Successfully ended the game!');
     }
@@ -333,8 +394,6 @@ playerObjectSelector = (id) => {
 }
 
 
-
-
 /**
  *  Screen Functions
  *  ex. display scoreboard when game playing
@@ -347,12 +406,15 @@ showScoreBoard = () =>{
         selectedPlayer = playerObjectSelector(i);
         console.log(selectedPlayer.playerName);
         //document.getElementsByClassName('scoreboard-players')[0].innerHTML = '<h3 class="player' + i +'> ' + selectedPlayer.playername + '</h3>';
-        document.querySelector(`.scoreboard-players .player${i}`).innerHTML = `${selectedPlayer.playerName}: ${selectedPlayer.score}`;
+        document.querySelector(`.scoreboard-players .player${i}`).innerHTML = `${selectedPlayer.playerName}: ${selectedPlayer.score} / KO Number: ${selectedPlayer.knockOutNum}`;
         document.querySelector('.game-score').style.display = 'flex'; 
     }
 }
 hideScoreBoard = () =>{
-    document.querySelector('.game-score').style.display = 'none'; 
+    document.querySelector('.game-score').style.display = 'none';
+    for(i = 1; i < 5; i++) {
+        document.querySelector(`.scoreboard-players .player${i}`).innerHTML = ` `; 
+    }
 }
 
 showTurn = () =>{

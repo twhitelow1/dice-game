@@ -1,0 +1,37 @@
+{
+    "name": "Dice Game",
+    "description": "This app does one little thing, and does it well.",
+    "keywords": [
+      "dice",
+      "game"
+    ],
+    "repository": "https://github.com/twhitelow1/dice-game",
+    "logo": "",
+    "success_url": "/index.html",
+    "scripts": {
+      "postdeploy": "bundle exec rake bootstrap"
+    },
+    
+
+    "image": "heroku/ruby",
+    "addons": [
+      "openredis",
+      {
+        "plan": "mongolab:shared-single-small",
+        "as": "MONGO"
+      },
+      {
+        "plan": "heroku-postgresql",
+        "options": {
+          "version": "9.5"
+        }
+      }
+    ],
+
+    "buildpacks": [
+      {
+        "url": "https://github.com/stomita/heroku-buildpack-phantomjs"
+      }
+    ]
+
+  }

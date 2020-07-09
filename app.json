@@ -5,11 +5,5 @@
       "dice",
       "game"
     ],
-    "repository": "https://github.com/twhitelow1/dice-game",
-    "logo": "",
-    "success_url": "/index.html",
-    "scripts": {
-      "postdeploy": "bundle exec rake bootstrap"
-    }
-
-  }s
+    "repository": "https://github.com/twhitelow1/dice-game"
+  }

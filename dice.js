@@ -430,7 +430,7 @@ hideTurn = () =>{
     document.querySelector('.game-info').style.display = 'none'; 
 }
 
-setupScreen = () =>{
+function setupScreen(){
     if(newGame.isOver === true){
         document.querySelector('.startGame').style.display = 'flex';
         document.querySelector('.endGame').style.display = 'none';  

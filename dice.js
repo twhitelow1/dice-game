@@ -73,39 +73,39 @@ class Die {
 let die1 = new Die(1, 'red');
 let die2 = new Die(2, 'blue');
 
-class Game {
-    constructor(playerNames, numOfPlayers, knockOutNumbers  ){
+class Game{
+    constructor(playerNames, numOfPlayers, knockOutNumbers) {
     this.numOfPlayers = numOfPlayers;
     this.playerNames = playerNames;
     this.knockOutNumbers = knockOutNumbers;
     }
-
-    currentPlayerNum = 1;
-    isOver = true;
-    winner = '';
-    winnerScore = 0;
-    get isOver(){
+    
+    getIsOver(){
         return this.isOver;
     }
-    set isOver(state){
+    setIsOver(state){
         this.isOver = state;
     }
-    get winner(){
+    getWinner(){
         return this.winner;
     }
-    set winner(winner){
+    setwinner(winner){
         this.winner = winner;
     }  
-    set currentPlayerNum(playerNum){
-        this.currentPlayerNum = playerNum;
+    setCurrentPlayerNum(number) {
+        this.currentPlayerNum = number;
     }
-    get currentPlayerNum(){
+    getCurrentPlayerNum(){
         return this.currentPlayerNum
     }
 }
 
 
-newGame = new Game([], 0, []);
+newGame = new Game([], 0, [], 1, true, '', 0);
+newGame.currentPlayerNum = 1;
+newGame.isOver = true;
+newGame.winner = '';
+newGame.winnerScore = 0;
 
 /**
  *      Player Class
@@ -117,9 +117,6 @@ class Player{
         this.playerName = playerName;
         this.knockOutNum = knockOutNum;
     }
-    _isKO = false;
-    _isTurn = false;
-    _score = 0;
 
     get isTurn(){
         return this._isTurn;
@@ -264,18 +261,30 @@ function startGame(){
         switch(playerNum){
             case 1:
                 playerOne =  new Player(playerNum, playerName, playerKO) ;
+                playerOne._isKO = false;
+                playerOne._isTurn = false;
+                playerOne._score = 0;
                 console.log(playerOne);
             break;
             case 2:
                 playerTwo =  new Player(playerNum, playerName, playerKO) ;
+                playerTwo._isKO = false;
+                playerTwo._isTurn = false;
+                playerTwo._score = 0;
                 console.log(playerTwo);
             break;
             case 3:
                 playerThree =  new Player(playerNum, playerName, playerKO) ;
+                playerThree._isKO = false;
+                playerThree._isTurn = false;
+                playerThree._score = 0;
                 console.log(playerThree);
             break;
             case 4:
                 playerFour =  new Player(playerNum, playerName, playerKO) ;
+                playerFour._isKO = false;
+                playerFour._isTurn = false;
+                playerFour._score = 0;
                 console.log(playerFour);
             break;
         }
@@ -430,7 +439,7 @@ hideTurn = () =>{
     document.querySelector('.game-info').style.display = 'none'; 
 }
 
-function setupScreen(){
+setupScreen = () =>{
     if(newGame.isOver === true){
         document.querySelector('.startGame').style.display = 'flex';
         document.querySelector('.endGame').style.display = 'none';  
